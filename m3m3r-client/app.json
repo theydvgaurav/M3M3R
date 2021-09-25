@@ -1,0 +1,16 @@
+{
+  "expo": {
+   "name": "memer",
+   "icon": "./assets/logo.png",
+   "version": "1.0.0",
+   "slug": "memer",
+   "ios": {
+     "bundleIdentifier": "com.yourcompany.yourappname",
+     "buildNumber": "1.0.0"
+   },
+   "android": {
+     "package": "com.gauravgt.memer",
+     "versionCode": 1
+   }
+  }
+}
