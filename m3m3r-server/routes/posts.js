@@ -1,51 +1,81 @@
 const express = require('express')
 const router = express.Router()
-const {posts } = require('../models/model.js')
+const { posts } = require('../models/model.js')
 
-router.post('/feed', async (request,response)=>{
+router.post('/feed', async (request, response) => {
 
-    const post = new posts({
-        name : request.body.name,
-        title : request.body.title,
-        data : request.body.data,
-           
-    })
+  const post = new posts({
+    name: request.body.name,
+    title: request.body.title,
+    data: request.body.data,
 
-    post.save()
+  })
+
+  post.save()
     .then(data => {
-        response.json(data)
+      response.json(data)
     })
     .catch(error => {
-        response.json(error)
+      response.json(error)
     })
-} )
+})
 
 
-router.get('/feed', async (req,res)=>{
+router.get('/feed', async (req, res) => {
 
-    try {
-        const pos = await posts.find();
-        res.send(pos);
-      } 
-      catch (e) {
-        res.status(400).send(e);
-      }
-       
-    })
+  try {
+    const pos = await posts.find();
+    res.send(pos);
+  }
+  catch (e) {
+    res.status(400).send(e);
+  }
 
-// router.delete('/newcentre/:id', async (req, res) => {
-//   const _id = req.params.id;
-//   try {
-//     const cent = await cen.findByIdAndDelete(_id);
-//     return !cent ? res.sendStatus(404) : res.send(cent);
-//   } catch (e) {
-//     return res.sendStatus(400);
-//   }
-// });
+})
 
+router.get('/feed/:id', async (req, res) => {
+  const _id = req.params.id;
+  try {
+    const pos = await posts.findById(_id);
+    res.send(pos);
+  }
+  catch (e) {
+    res.status(400).send(e);
+  }
+
+})
+
+router.delete('/feed/:id', async (req, res) => {
+  const _id = req.params.id;
+  try {
+    const item = await posts.findByIdAndDelete(_id);
+    return !item ? res.sendStatus(404) : res.send(item);
+  } catch (e) {
+    return res.sendStatus(400);
+  }
+});
+
+router.patch("/feed/:id", async (req, res) => {
+  const _id = req.params.id;
+
+  try {
+    const pos = await posts
+      .findByIdAndUpdate(req.params.id, req.body, { new: true })
+      .then((meme) => {
+        if (!meme) {
+          return res.status(404).send();
+        }
+        res.send(meme);
+      });
+    return !pos ? res.sendStatus(404) : res.send(pos);
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
 
 
 
 
 module.exports = router;
+
 

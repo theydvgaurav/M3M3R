@@ -22,11 +22,13 @@ const MemeList = () => {
         getPosts();
     }, [])
 
+        console.log({Data})
+
     return (
         <>
              
-             {Data.map((post: { name: string, title: string, data: string }) => (
-                <MemeCard name={post.name} title={post.title}  data={post.data} />
+             {Data.map((post: { name: string, title: string, data: string , _id : string}) => (
+                <MemeCard name={post.name} title={post.title}  data={post.data} id={post._id} />
             ))}
         </>
 

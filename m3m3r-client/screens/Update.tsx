@@ -13,12 +13,13 @@ import axios from 'axios'
 import * as FileSystem from 'expo-file-system';
 
 //declaring screenprop type for the JSX category screen
-type NewMemeScreenProps = StackScreenProps<RootParamList, "NewMemeScreen">;
+type UpdateScreenProps = StackScreenProps<RootParamList, "UpdateScreen">;
 
-const NewMemeScreen = ({ navigation, route }: NewMemeScreenProps) => {
+const UpdateScreen = ({ navigation, route }: UpdateScreenProps) => {
+
     const [image, setImage] = useState('null');
-    const [name, setname] = useState('')
-    const [title, settitle] = useState('')
+    const [name, setname] = useState(route.params.name)
+    const [title, settitle] = useState(route.params.title)
     const [url, seturl] = useState('')
 
     useEffect(() => {
@@ -50,7 +51,10 @@ const NewMemeScreen = ({ navigation, route }: NewMemeScreenProps) => {
     const AddPostHandler = (event: any) => {
         event.preventDefault();
 
-        let dt = image
+        let dt = route.params.data
+        if(image){
+            dt = image
+        }
         if (url) {
             dt = url.toString();
         }
@@ -72,7 +76,7 @@ const NewMemeScreen = ({ navigation, route }: NewMemeScreenProps) => {
             check = false;
         }
         if (check) {
-            axios.post('https://m3m3r.herokuapp.com/app/feed', post)
+            axios.patch(`http://localhost:4000/app/feed/${route.params.id}`, post)
                 .then(response => {
                     if (response.status == 200){
                         alert('Post Successfully Uploaded')
@@ -149,7 +153,7 @@ const NewMemeScreen = ({ navigation, route }: NewMemeScreenProps) => {
     );
 };
 
-export default NewMemeScreen;
+export default UpdateScreen;
 
 
 const styles = StyleSheet.create({

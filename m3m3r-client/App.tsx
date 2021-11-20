@@ -6,6 +6,7 @@ import config from "./config/all";
 
 import HomeScreen from "./screens/HomeScreen";
 import NewMemeScreen from "./screens/NewMeme";
+import UpdateScreen from "./screens/Update";
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
@@ -20,6 +21,7 @@ export type RootParamList = {
 	BottomNavBar: undefined;
 	MemeCard : undefined;
 	NewMemeScreen : undefined;
+	UpdateScreen : {id:string, name : string, title : string, data : string}
 };
 
 //create stack navigator with correct type = params for all screens
@@ -35,6 +37,7 @@ export default function App() {
 			>
 				<Root.Screen name="HomeScreen" component={HomeScreen} options = {{headerShown : false}}/>
 				<Root.Screen name="NewMemeScreen" component={NewMemeScreen} options = {{headerShown : false}}/>
+				<Root.Screen name="UpdateScreen" component={UpdateScreen} options = {{headerShown : false}}/>
 			</Root.Navigator>
 		</NavigationContainer>
 	);
