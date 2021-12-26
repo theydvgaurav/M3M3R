@@ -101,8 +101,8 @@ Start the application
 ## Screenshots
 
 <div align="center">
-    <img src="1.jpeg" width="600px" height="800px" </img> 
-    <img src="2.jpeg" width="600px" height="800px" </img>
+    <img src="1.png" width="600px" height="800px" </img> 
+    <img src="2.png" width="600px" height="800px" </img>
 </div>
 
 
